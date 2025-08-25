@@ -57,19 +57,14 @@
 
 - **모델링** : 
    **최종 모델 - 호선별 Fold XGBoost**
-   ![최종모델구조](./image/최종모델구조.png)
-      - 🔗[하이퍼파라미터 튜닝](https://github.com/silverjin7778/modeling-2025-weather-bigdata-contest-award-subway-congestion-prediction-with-weather/blob/82e7028fe46e333bdb58ac6649a6bca3d84a27fa/code_py/models/final/%EB%AA%A8%EB%8D%B8_%ED%8A%9C%EB%8B%9D.py#L68-L120)
-      - 🔗[호선별 fold XGBoost 학습](https://github.com/silverjin7778/modeling-2025-weather-bigdata-contest-award-subway-congestion-prediction-with-weather/blob/82e7028fe46e333bdb58ac6649a6bca3d84a27fa/code_py/models/final/%EC%B5%9C%EC%A2%85%EB%AA%A8%EB%8D%B8%ED%95%99%EC%8A%B5.py#L74-L150)
+   ![최종모델구조1](./image/최종모델구조1.png)
+   ![최종모델구조2](./image/최종모델구조2.png)
+
+   - 🔗[하이퍼파라미터 튜닝](https://github.com/silverjin7778/modeling-2025-weather-bigdata-contest-award-subway-congestion-prediction-with-weather/blob/82e7028fe46e333bdb58ac6649a6bca3d84a27fa/code_py/models/final/%EB%AA%A8%EB%8D%B8_%ED%8A%9C%EB%8B%9D.py#L68-L120)
+
+   - 🔗[호선별 fold XGBoost 학습](https://github.com/silverjin7778/modeling-2025-weather-bigdata-contest-award-subway-congestion-prediction-with-weather/blob/82e7028fe46e333bdb58ac6649a6bca3d84a27fa/code_py/models/final/%EC%B5%9C%EC%A2%85%EB%AA%A8%EB%8D%B8%ED%95%99%EC%8A%B5.py#L74-L150)
+
    🔗 [기각 모델 - 멀티스트림](https://github.com/silverjin7778/modeling-2025-weather-bigdata-contest-award-subway-congestion-prediction-with-weather/blob/82e7028fe46e333bdb58ac6649a6bca3d84a27fa/code_py/models/discarded/%EB%A9%80%ED%8B%B0%EC%8A%A4%ED%8A%B8%EB%A6%BC_%ED%95%98%EC%9D%B4%EB%B8%8C%EB%A6%AC%EB%93%9C_%EB%94%A5%EB%9F%AC%EB%8B%9D.py#L186-L224)
-
-   ```
-   Temporal (P_t) ─ Dense(64, ReLU) ──┐
-   Weather  (P_w) ─ Dense(32, ReLU) ──┤
-   Station  (1)   ─ Emb(…)->Flatten ──┤
-   Address  (1)   ─ Emb(…)->Flatten ──┤── Concat ─ Dense(64, ReLU) ─ Dropout(0.3) ─ Dense(32, ReLU) ─ Dense(1)
-   TimePeriod(1)  ─ Emb(…)->Flatten ──┘
-
-   ```
 
 ## 3. 이슈사항
 
