@@ -33,13 +33,13 @@
 * **분석** : EDA, 상관분석, 다중회귀, VIF
 * **모델링** :
 
-  * 최종 : 호선별 Fold 기반 **XGBoost**
+  * 최종 : **호선별 Fold 기반 XGBoost**
   * 시도 : LSTM, GRU, RNN, 멀티스트림, 연도별 전이학습
 
 ### 1-5. 수행 업무
 
 * 외부 데이터 수집 (역 주소 스크래핑, 환승역 수기 입력)
-* EDA 및 데이터 전처리 자동화 파이프라인 구축
+* EDA 및 데이터 전처리 파이프라인 구축
 * 통계 분석 및 가설 검정
 * 모델링 및 성능 개선 (전이학습, 멀티스트림, 하이퍼파라미터 튜닝)
 
@@ -50,29 +50,14 @@
 
 ## 모델 구조
 
-```mermaid
-flowchart TD
-    A[전체 데이터 df, test_loaded] --> B[호선별 분리: for line in df['Line'].unique()]
-    B --> C{라인별 K-Fold}
-    C -->|Fold 1..K| D1[Train/Val 분할<br/>TimeSeriesSplit(시간 순서 보존)]
-    D1 --> E1[전처리(Train에만 fit)<br/>One-Hot(Train)→컬럼기준 맞추기→MinMaxScaler]
-    E1 --> F1[XGBoost 학습(Train Fold)]
-    F1 --> G1[검증(Val Fold)<br/>RMSE/R² 기록]
-    C -->|모든 폴드 반복| H[폴드 성능 집계/로그]
-    H --> I[라인 전체 데이터로 최종 재학습(Full Train)]
-    I --> J[라인별 Test 전처리(Train 기준 컬럼/스케일 적용)]
-    J --> K[라인별 예측 생성 및 clip/round]
-    K --> L[결과 결합 후 submission 저장]
-```
-
 - **EDA**
-   - **상관분석, 다중회귀, VIF(다중공선성) 검정**
-   - 🔗[링크](code_py/EDA/은진_EDA.ipynb)
+   - 🔗[상관분석, 다중회귀, VIF(다중공선성) 검정](code_py/EDA/은진_EDA.ipynb)
 
-- **데이터 전처리** : 🔗 [전처리](https://github.com/silverjin7778/modeling-sme-fx-risk-management-platform/blob/cc802a90d052190ee8cdce3232ec5eef2701cd8e/code_py/%ED%99%98%EC%9C%A8%EB%B3%80%EB%8F%99%EC%84%B1%EC%A7%80%EC%88%98%20%EA%B0%9C%EB%B0%9C/epu_%EA%B3%84%EC%82%B0_2021_to_2025.py#L7-L128)
+- **데이터 전처리** : 🔗 [전처리](https://github.com/silverjin7778/modeling-sme-fx-risk-ma)
 
 - **모델링** : 
    **최종 모델 - 호선별 Fold XGBoost**
+   ![최종모델구조](./image/최종모델구조.png)
       - 🔗[하이퍼파라미터 튜닝](https://github.com/silverjin7778/modeling-2025-weather-bigdata-contest-award-subway-congestion-prediction-with-weather/blob/82e7028fe46e333bdb58ac6649a6bca3d84a27fa/code_py/models/final/%EB%AA%A8%EB%8D%B8_%ED%8A%9C%EB%8B%9D.py#L68-L120)
       - 🔗[호선별 fold XGBoost 학습](https://github.com/silverjin7778/modeling-2025-weather-bigdata-contest-award-subway-congestion-prediction-with-weather/blob/82e7028fe46e333bdb58ac6649a6bca3d84a27fa/code_py/models/final/%EC%B5%9C%EC%A2%85%EB%AA%A8%EB%8D%B8%ED%95%99%EC%8A%B5.py#L74-L150)
    🔗 [기각 모델 - 멀티스트림](https://github.com/silverjin7778/modeling-2025-weather-bigdata-contest-award-subway-congestion-prediction-with-weather/blob/82e7028fe46e333bdb58ac6649a6bca3d84a27fa/code_py/models/discarded/%EB%A9%80%ED%8B%B0%EC%8A%A4%ED%8A%B8%EB%A6%BC_%ED%95%98%EC%9D%B4%EB%B8%8C%EB%A6%AC%EB%93%9C_%EB%94%A5%EB%9F%AC%EB%8B%9D.py#L186-L224)
